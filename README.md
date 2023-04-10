@@ -1,3 +1,5 @@
+I forked this from markub3327's repo in order to make the environment's horizontal velocity customizeable.
+
 # Flappy Bird for Gymnasium
 
 ![Python versions](https://img.shields.io/pypi/pyversions/flappy-bird-gymnasium)
