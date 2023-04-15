@@ -38,7 +38,7 @@ from typing import Dict, Tuple, Union
 import pygame
 
 ############################ Speed and Acceleration ############################
-PIPE_VEL_X = -4
+# PIPE_VEL_X = -4
 
 PLAYER_MAX_VEL_Y = 10  # max vel along Y, max descend speed
 PLAYER_MIN_VEL_Y = -8  # min vel along Y, max ascend speed
@@ -96,9 +96,11 @@ class FlappyBirdLogic:
         player_idx (int): Current index of the bird's animation cycle.
     """
 
-    def __init__(self, screen_size: Tuple[int, int], pipe_gap_size: int = 100) -> None:
+    def __init__(self, screen_size: Tuple[int, int], pipe_gap_size: int = 100, x_velocity: int = -4) -> None:
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
+
+        self._x_velocity = x_velocity
 
         self.player_x = int(self._screen_width * 0.2)
         self.player_y = int((self._screen_height - PLAYER_HEIGHT) / 2)
@@ -260,8 +262,8 @@ class FlappyBirdLogic:
 
         # move pipes to left
         for up_pipe, low_pipe in zip(self.upper_pipes, self.lower_pipes):
-            up_pipe["x"] += PIPE_VEL_X
-            low_pipe["x"] += PIPE_VEL_X
+            up_pipe["x"] += self._x_velocity #PIPE_VEL_X
+            low_pipe["x"] += self._x_velocity #PIPE_VEL_X
 
             # it is out of the screen
             if up_pipe["x"] < -PIPE_WIDTH:
