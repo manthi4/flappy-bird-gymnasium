@@ -82,9 +82,11 @@ class FlappyBirdEnvSimple(gymnasium.Env):
         pipe_color: str = "green",
         background: Optional[str] = "day",
         x_velocity: int = -4,
+        gravity:int = 1,
     ) -> None:
         
         self._x_velocity = x_velocity
+        self.gravity = gravity
 
         self.action_space = gymnasium.spaces.Discrete(2)
         self.observation_space = gymnasium.spaces.Box(
@@ -181,7 +183,7 @@ class FlappyBirdEnvSimple(gymnasium.Env):
         super().reset(seed=seed)
 
         self._game = FlappyBirdLogic(
-            screen_size=self._screen_size, pipe_gap_size=self._pipe_gap, x_velocity=self._x_velocity
+            screen_size=self._screen_size, pipe_gap_size=self._pipe_gap, x_velocity=self._x_velocity, gravity=self.gravity
         )
         if self._renderer is not None:
             self._renderer.game = self._game

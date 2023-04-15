@@ -43,7 +43,7 @@ import pygame
 PLAYER_MAX_VEL_Y = 10  # max vel along Y, max descend speed
 PLAYER_MIN_VEL_Y = -8  # min vel along Y, max ascend speed
 
-PLAYER_ACC_Y = 1  # players downward acceleration
+# PLAYER_ACC_Y = 1  # players downward acceleration
 PLAYER_VEL_ROT = 3  # angular speed
 
 PLAYER_FLAP_ACC = -9  # players speed on flapping
@@ -96,11 +96,12 @@ class FlappyBirdLogic:
         player_idx (int): Current index of the bird's animation cycle.
     """
 
-    def __init__(self, screen_size: Tuple[int, int], pipe_gap_size: int = 100, x_velocity: int = -4) -> None:
+    def __init__(self, screen_size: Tuple[int, int], pipe_gap_size: int = 100, x_velocity: int = -4, gravity = 1) -> None:
         self._screen_width = screen_size[0]
         self._screen_height = screen_size[1]
 
         self._x_velocity = x_velocity
+        self._gravity = gravity
 
         self.player_x = int(self._screen_width * 0.2)
         self.player_y = int((self._screen_height - PLAYER_HEIGHT) / 2)
@@ -247,7 +248,7 @@ class FlappyBirdLogic:
 
         # player's movement
         if self.player_vel_y < PLAYER_MAX_VEL_Y and not self._player_flapped:
-            self.player_vel_y += PLAYER_ACC_Y
+            self.player_vel_y += self._gravity
 
         if self._player_flapped:
             self._player_flapped = False
