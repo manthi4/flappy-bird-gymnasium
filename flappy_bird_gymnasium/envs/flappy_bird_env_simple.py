@@ -188,8 +188,8 @@ class FlappyBirdEnvSimple(gymnasium.Env):
         if self._renderer is not None:
             self._renderer.game = self._game
 
-        info = {"score": self._game.score}
-        return self._get_observation(), info
+        # info = {"score": self._game.score}
+        return self._get_observation()#, info
 
     def set_color(self, color):
         if self._renderer is not None:
